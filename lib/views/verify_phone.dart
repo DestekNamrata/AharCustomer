@@ -36,6 +36,7 @@ class VerifyPhoneState extends State<VerifyPhonePage>{
   void initState() {
     super.initState();
     _startTimer();
+
   }
 
   @override
