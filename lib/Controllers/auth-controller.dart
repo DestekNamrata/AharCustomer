@@ -396,6 +396,7 @@ class AuthController extends GetxController {
         Get.put(GlobalController()).initController();
         Get.off(() => MainScreen());
       }
+
       else {
         Get.rawSnackbar(message: 'Please enter valid input');
       }
