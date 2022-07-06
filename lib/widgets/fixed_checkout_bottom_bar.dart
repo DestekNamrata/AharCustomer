@@ -116,7 +116,7 @@ class _CheckoutBottomBarState extends State<CheckoutBottomBar> {
                     ),
                     onPressed: () async {
                       setState(() {
-                        Get.to(() => CheckoutPage());
+                        Get.to(() => CheckoutPage(address: "",lat: "",long: ""));
                       });
                     },
                     child: Text(

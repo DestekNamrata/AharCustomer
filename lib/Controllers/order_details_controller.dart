@@ -19,7 +19,9 @@ class OrderDetailsController extends GetxController {
       deliveryBoyName,
       deliveryBoyEmail,
       deliveryBoyPhone,
-      deliveryBoyImage;
+      deliveryBoyImage,
+      waitingTime;
+
   bool orderDetailsDataLoader = true;
   List<Item> itemList = <Item>[];
 
@@ -44,6 +46,7 @@ class OrderDetailsController extends GetxController {
         itemList = <Item>[];
         itemList.addAll(orderDetailsData.data!.items!);
         orderId = orderDetailsData.data!.id!;
+        waitingTime = orderDetailsData.data!.waitingTime!;
         total = orderDetailsData.data!.total!;
         subTotal = orderDetailsData.data!.subTotal!;
         deliveryCharge = orderDetailsData.data!.deliveryCharge!;

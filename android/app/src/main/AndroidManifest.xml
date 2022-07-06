@@ -7,8 +7,8 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
     <uses-permission android:name="android.permission.VIBRATE" />
    <application
-        android:label="Ahar Customer"
-        android:icon="@drawable/ahar_sq">
+        android:label="AHAR Customer"
+        android:icon="@mipmap/launcher_icon">
        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
        <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
 
@@ -64,6 +64,8 @@
             android:name="flutterEmbedding"
             android:value="2" />
          <meta-data android:name="com.google.android.geo.API_KEY"
-                  android:value="AIzaSyBpl-_4UOIW-riBkH2rXpH-8DzdXkacEJo"/>
+             android:value="AIzaSyCIl53C_jNlAEl4OQlqDWIKkvp97O2ikbY"/>
+<!--                  android:value="AIzaSyBpl-_4UOIW-riBkH2rXpH-8DzdXkacEJo"/>-->
+
     </application>
 </manifest>

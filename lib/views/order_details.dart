@@ -373,7 +373,33 @@ class _OrderDetailsState extends State<OrderDetails> {
                                             ],
                                           ),
                                         ),
-                                        //   Stepper
+                                        SizedBox(height: 10),
+
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 1.0, horizontal: 15),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                "Waiting Time",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                              Text(
+                                                "${orderDetails.waitingTime}min",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+
                                       ],
                                     ),
                                   ),

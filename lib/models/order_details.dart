@@ -73,8 +73,10 @@ class DataData {
     this.customer,
     this.restaurant,
     this.deliveryBoy,
+    this.waitingTime,
   });
 
+  String? waitingTime;
   int? id;
   int? userId;
   String? total;
@@ -107,6 +109,7 @@ class DataData {
 
   factory DataData.fromJson(Map<String, dynamic> json) => DataData(
         id: json["id"],
+    waitingTime: json['waiting_time'],
         userId: json["user_id"],
         total: json["total"],
         subTotal: json["sub_total"],
@@ -147,6 +150,7 @@ class DataData {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "waiting_time": waitingTime,
         "user_id": userId,
         "total": total,
         "sub_total": subTotal,

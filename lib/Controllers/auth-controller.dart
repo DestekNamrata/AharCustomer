@@ -60,26 +60,26 @@ class AuthController extends GetxController {
   }
 
 
-  // loginOnTap({BuildContext? context, String? email, String? pass}) async {
-  loginOnTap({BuildContext? context, String? phone}) async {
+  loginOnTap({BuildContext? context, String? email, String? pass}) async {
+  // loginOnTap({BuildContext? context, String? phone}) async {
     print('email');
     loader = true;
     Future.delayed(Duration(milliseconds: 10), () {
       update();
     });
-    // var emailValidator = _validators.validateEmail(value: email);
-    // var passValidator = _validators.validatePassword(value: pass);
-    var phoneValidator = _validators.validatePhone(value: phone);
-    // if (emailValidator == null && passValidator == null) {
-    if (phoneValidator == null) {
-      // Map body = {'email': email, 'password': pass};
-      Map body = {'mobile': phone};
+    var emailValidator = _validators.validateEmail(value: email);
+    var passValidator = _validators.validatePassword(value: pass);
+    // var phoneValidator = _validators.validatePhone(value: phone);
+    if (emailValidator == null && passValidator == null) {
+    // if (phoneValidator == null) {
+      Map body = {'email': email, 'password': pass};
+      // Map body = {'mobile': phone};
       String jsonBody = json.encode(body);
       server
           .postRequest(endPoint: APIList.login, body: jsonBody)
           .then((response) {
         if (response != null && response.statusCode == 200) {
-          // updateFcmSubscribe(email);
+          updateFcmSubscribe(email);
           final jsonResponse = json.decode(response.body);
           var loginData = LoginApi.fromJson(jsonResponse);
           var bearerToken = 'Bearer ' + "${loginData.token}";
@@ -129,87 +129,123 @@ class AuthController extends GetxController {
   //firebase verification of phone number
   VerifyWithPhone({BuildContext? context,String? phone}) async {
     loader = true;
-    try {
-      await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: "+91${phone}",
-        verificationCompleted: (PhoneAuthCredential credential) {},
-        verificationFailed: (FirebaseAuthException e) {
-          loader = false;
-          if (e.code == 'invalid-phone-number') {
-            // Get.bottomSheet(ErrorAlert(
-            //   message: "Phone number is not valid".tr,
-            //   onClose: () {
-            //     Get.back();
-            //   },
-            // ));
-            Fluttertoast.showToast(msg: "Phone number is not valid".tr);
-          }
-        },
-        codeSent: (String vId, int? resendToken) {
-          loader = false;
-          verificationId = vId;
-          // Get.toNamed("/verifyPhone",
-          //     arguments: {
-          //       "phone": phone,
-          //       "flagVerify": "0"
-          //     });
+    var phoneValidator = _validators.validatePhone(value: phone);
 
-          Get.to(() => VerifyPhonePage(flagVerify: "0", phone: phone));
-          //from signIn
-        },
-        codeAutoRetrievalTimeout: (String verificationId) {},
-      );
+    try {
+      if (phoneValidator == null) {
+        await FirebaseAuth.instance.verifyPhoneNumber(
+          phoneNumber: "+91${phone}",
+          verificationCompleted: (PhoneAuthCredential credential) {},
+          verificationFailed: (FirebaseAuthException e) {
+            loader = false;
+            if (e.code == 'invalid-phone-number') {
+              // Get.bottomSheet(ErrorAlert(
+              //   message: "Phone number is not valid".tr,
+              //   onClose: () {
+              //     Get.back();
+              //   },
+              // ));
+              Fluttertoast.showToast(msg: "Phone number is not valid".tr);
+            }
+          },
+          codeSent: (String vId, int? resendToken) {
+            loader = false;
+            verificationId = vId;
+            // Get.toNamed("/verifyPhone",
+            //     arguments: {
+            //       "phone": phone,
+            //       "flagVerify": "0"
+            //     });
+
+            Get.to(() => VerifyPhonePage(flagVerify: "0", phone: phone));
+            //from signIn
+          },
+          codeAutoRetrievalTimeout: (String verificationId) {},
+        );
+      }else{
+        loader = false;
+        Future.delayed(Duration(milliseconds: 10), () {
+          update();
+        });
+        Get.rawSnackbar(message: 'Please enter phone number');
+      }
     }catch(e){
       print(e);
     }
-
   }
 
   //for signup
   VerifyWithPhoneSignUp({BuildContext? context,String? phone,String? email,String? name,String? userName,
     String? password,String? cnfPass}) async {
     loader = true;
-    try {
-      await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: "+91${phone}",
-        verificationCompleted: (PhoneAuthCredential credential) {},
-        verificationFailed: (FirebaseAuthException e) {
-          loader = false;
-          if (e.code == 'invalid-phone-number') {
-            // Get.bottomSheet(ErrorAlert(
-            //   message: "Phone number is not valid".tr,
-            //   onClose: () {
-            //     Get.back();
-            //   },
-            // ));
-            Fluttertoast.showToast(msg: "Phone number is not valid".tr);
-          }
-        },
-        codeSent: (String vId, int? resendToken) {
-          loader = false;
-          verificationId = vId;
-          // Get.toNamed("/verifyPhone",
-          //     arguments: {
-          //       "phone": phone,
-          //       "flagVerify": "0"
-          //     });
+    var email_validator = _validators.validateEmail(value: email);
+    var pass_validator = _validators.validatePassword(value: password);
+    var phone_validator = _validators.validatePhone(value: phone);
 
-          Get.to(() => VerifyPhonePage(flagVerify: "1", phone: phone,
-          email: email,
-          password: password,
-          name: name,
-          userName: userName,
-          cnfPass: cnfPass,));
-          //from signIn
-        },
-        codeAutoRetrievalTimeout: (String verificationId) {},
-      );
+    try {
+      if(email_validator!=null){
+        loader = false;
+        Future.delayed(Duration(milliseconds: 10), () {
+          update();
+        });
+        Get.rawSnackbar(message: 'Please enter valid email id');
+      }
+      else if(phone_validator!=null){
+        loader = false;
+        Future.delayed(Duration(milliseconds: 10), () {
+          update();
+        });
+        Get.rawSnackbar(message: 'Please enter valid Phone Number');
+      }
+      else if(pass_validator!=null){
+        loader = false;
+        Future.delayed(Duration(milliseconds: 10), () {
+          update();
+        });
+        Get.rawSnackbar(message: 'Please enter Password');
+      }else{
+        await FirebaseAuth.instance.verifyPhoneNumber(
+          phoneNumber: "+91${phone}",
+          verificationCompleted: (PhoneAuthCredential credential) {},
+          verificationFailed: (FirebaseAuthException e) {
+            loader = false;
+            if (e.code == 'invalid-phone-number') {
+              // Get.bottomSheet(ErrorAlert(
+              //   message: "Phone number is not valid".tr,
+              //   onClose: () {
+              //     Get.back();
+              //   },
+              // ));
+              Fluttertoast.showToast(msg: "Phone number is not valid".tr);
+            }
+          },
+          codeSent: (String vId, int? resendToken) {
+            loader = false;
+            verificationId = vId;
+            // Get.toNamed("/verifyPhone",
+            //     arguments: {
+            //       "phone": phone,
+            //       "flagVerify": "0"
+            //     });
+
+            Get.to(() => VerifyPhonePage(flagVerify: "1", phone: phone,
+              email: email,
+              password: password,
+              name: name,
+              userName: userName,
+              cnfPass: cnfPass,));
+            //from signIn
+          },
+          codeAutoRetrievalTimeout: (String verificationId) {},
+        );
+
+      }
+
     }catch(e){
       print(e);
     }
 
   }
-
 
   refreshToken() async {
     server.getRequest(endPoint: APIList.refreshToken).then((response) {

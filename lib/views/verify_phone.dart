@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:food_ex/Controllers/auth-controller.dart';
 import 'package:food_ex/utils/image.dart';
+import 'package:food_ex/utils/theme_colors.dart';
 import 'package:get/get.dart';
 
 import 'dart:async';
@@ -341,7 +342,9 @@ class VerifyPhoneState extends State<VerifyPhonePage>{
                         height: 45.0,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(28),
-                            color: Color.fromRGBO(69, 165, 36, 1)),
+                            // color: Color.fromRGBO(69, 165, 36, 1)
+                            color: ThemeColors.baseThemeColor
+                        ),
                         margin: EdgeInsets.only(top: 10.0),
                         alignment: Alignment.center,
                         child: TextButton(
@@ -350,7 +353,7 @@ class VerifyPhoneState extends State<VerifyPhonePage>{
                                   EdgeInsetsGeometry>(EdgeInsets.all(0))),
                           onPressed: (){
                             if(widget.flagVerify=="0"){
-                              controller.loginOnTap(context: context,phone: widget.phone);
+                              // controller.loginOnTap(context: context,phone: widget.phone);
                             }else {
                               controller.signupOnTap(context: context,
                               name: widget.name,
@@ -360,7 +363,6 @@ class VerifyPhoneState extends State<VerifyPhonePage>{
                               );
                             }
                             // controller.loginOnTap(context: context,phone: widget.phone);
-
                           },
                           child: Text(
                             "Verify and Create account".tr,

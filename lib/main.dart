@@ -21,7 +21,7 @@ class FoodEx extends StatelessWidget {
     Get.put(GlobalController()).onInit();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Ahar',
+      title: 'AHAR',
       theme: ThemeData(),
       home: Authentication(),
     );

@@ -148,63 +148,13 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
                                 child: Column(
                                   children: [
                                     ///Email Input Field
-                                    // Container(
-                                    //   height: 60,
-                                    //   child: TextFormField(
-                                    //     controller: _emailController,
-                                    //     validator: (value) {
-                                    //       if (_emailController.text.isEmpty) {
-                                    //         return "This field can't be empty";
-                                    //       }
-                                    //       return null;
-                                    //     },
-                                    //     style: GoogleFonts.poppins(
-                                    //       color: Colors.black,
-                                    //     ),
-                                    //     keyboardType:
-                                    //         TextInputType.emailAddress,
-                                    //     cursorColor: ThemeColors.primaryColor,
-                                    //     decoration: InputDecoration(
-                                    //       labelText: 'Email Address',
-                                    //       labelStyle: TextStyle(
-                                    //           color: Colors.grey, fontSize: 15),
-                                    //       hintText: 'Enter your email here',
-                                    //       hintStyle: TextStyle(
-                                    //           color: Colors.grey, fontSize: 15),
-                                    //       prefixIcon: Icon(
-                                    //         Icons.email_outlined,
-                                    //         color: ThemeColors.baseThemeColor,
-                                    //       ),
-                                    //       fillColor: Colors.black,
-                                    //       focusedBorder: OutlineInputBorder(
-                                    //         borderRadius:
-                                    //             BorderRadius.circular(10.0),
-                                    //         borderSide: BorderSide(
-                                    //           color: ThemeColors.baseThemeColor,
-                                    //         ),
-                                    //       ),
-                                    //       enabledBorder: OutlineInputBorder(
-                                    //         borderRadius:
-                                    //             BorderRadius.circular(10.0),
-                                    //         borderSide: BorderSide(
-                                    //           width: 0.2,
-                                    //           color: Colors.grey,
-                                    //         ),
-                                    //       ),
-                                    //     ),
-                                    //   ),
-                                    // ),
-                                    //phonenumber updated on 27/06/2022
                                     Container(
                                       height: 60,
                                       child: TextFormField(
-                                        controller: _phoneController,
+                                        controller: _emailController,
                                         validator: (value) {
-                                          if (_phoneController.text.isEmpty) {
+                                          if (_emailController.text.isEmpty) {
                                             return "This field can't be empty";
-                                          }else if(_phoneController.text.length!=10){
-                                            return "Please enter valid Mobile number";
-
                                           }
                                           return null;
                                         },
@@ -212,30 +162,30 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
                                           color: Colors.black,
                                         ),
                                         keyboardType:
-                                        TextInputType.phone,
+                                            TextInputType.emailAddress,
                                         cursorColor: ThemeColors.primaryColor,
                                         decoration: InputDecoration(
-                                          labelText: 'Mobile Number',
+                                          labelText: 'Email Address',
                                           labelStyle: TextStyle(
                                               color: Colors.grey, fontSize: 15),
-                                          hintText: 'Enter your mobile here',
+                                          hintText: 'Enter your email here',
                                           hintStyle: TextStyle(
                                               color: Colors.grey, fontSize: 15),
                                           prefixIcon: Icon(
-                                            Icons.phone_android_outlined,
+                                            Icons.email_outlined,
                                             color: ThemeColors.baseThemeColor,
                                           ),
                                           fillColor: Colors.black,
                                           focusedBorder: OutlineInputBorder(
                                             borderRadius:
-                                            BorderRadius.circular(10.0),
+                                                BorderRadius.circular(10.0),
                                             borderSide: BorderSide(
                                               color: ThemeColors.baseThemeColor,
                                             ),
                                           ),
                                           enabledBorder: OutlineInputBorder(
                                             borderRadius:
-                                            BorderRadius.circular(10.0),
+                                                BorderRadius.circular(10.0),
                                             borderSide: BorderSide(
                                               width: 0.2,
                                               color: Colors.grey,
@@ -244,49 +194,48 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(height: 16),
-
-                                    ///Password Input Field
+                                    //phonenumber updated on 27/06/2022
                                     // Container(
                                     //   height: 60,
                                     //   child: TextFormField(
-                                    //     controller: _passwordController,
+                                    //     controller: _phoneController,
                                     //     validator: (value) {
-                                    //       if (_passwordController
-                                    //           .text.isEmpty) {
+                                    //       if (_phoneController.text.isEmpty) {
                                     //         return "This field can't be empty";
+                                    //       }else if(_phoneController.text.length!=10){
+                                    //         return "Please enter valid Mobile number";
+                                    //
                                     //       }
                                     //       return null;
                                     //     },
-                                    //     obscureText: true,
                                     //     style: GoogleFonts.poppins(
                                     //       color: Colors.black,
                                     //     ),
                                     //     keyboardType:
-                                    //         TextInputType.visiblePassword,
+                                    //     TextInputType.phone,
                                     //     cursorColor: ThemeColors.primaryColor,
                                     //     decoration: InputDecoration(
-                                    //       labelText: 'Password',
+                                    //       labelText: 'Mobile Number',
                                     //       labelStyle: TextStyle(
                                     //           color: Colors.grey, fontSize: 15),
-                                    //       hintText: 'Enter your password here',
+                                    //       hintText: 'Enter your mobile here',
                                     //       hintStyle: TextStyle(
                                     //           color: Colors.grey, fontSize: 15),
                                     //       prefixIcon: Icon(
-                                    //         Icons.lock,
+                                    //         Icons.phone_android_outlined,
                                     //         color: ThemeColors.baseThemeColor,
                                     //       ),
                                     //       fillColor: Colors.black,
                                     //       focusedBorder: OutlineInputBorder(
                                     //         borderRadius:
-                                    //             BorderRadius.circular(10.0),
+                                    //         BorderRadius.circular(10.0),
                                     //         borderSide: BorderSide(
                                     //           color: ThemeColors.baseThemeColor,
                                     //         ),
                                     //       ),
                                     //       enabledBorder: OutlineInputBorder(
                                     //         borderRadius:
-                                    //             BorderRadius.circular(10.0),
+                                    //         BorderRadius.circular(10.0),
                                     //         borderSide: BorderSide(
                                     //           width: 0.2,
                                     //           color: Colors.grey,
@@ -295,6 +244,57 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
                                     //     ),
                                     //   ),
                                     // ),
+                                    SizedBox(height: 16),
+
+                                    //Password Input Field
+                                    Container(
+                                      height: 60,
+                                      child: TextFormField(
+                                        controller: _passwordController,
+                                        validator: (value) {
+                                          if (_passwordController
+                                              .text.isEmpty) {
+                                            return "This field can't be empty";
+                                          }
+                                          return null;
+                                        },
+                                        obscureText: true,
+                                        style: GoogleFonts.poppins(
+                                          color: Colors.black,
+                                        ),
+                                        keyboardType:
+                                            TextInputType.visiblePassword,
+                                        cursorColor: ThemeColors.primaryColor,
+                                        decoration: InputDecoration(
+                                          labelText: 'Password',
+                                          labelStyle: TextStyle(
+                                              color: Colors.grey, fontSize: 15),
+                                          hintText: 'Enter your password here',
+                                          hintStyle: TextStyle(
+                                              color: Colors.grey, fontSize: 15),
+                                          prefixIcon: Icon(
+                                            Icons.lock,
+                                            color: ThemeColors.baseThemeColor,
+                                          ),
+                                          fillColor: Colors.black,
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            borderSide: BorderSide(
+                                              color: ThemeColors.baseThemeColor,
+                                            ),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            borderSide: BorderSide(
+                                              width: 0.2,
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                     SizedBox(height: 20),
 
                                     ///Sign in button
@@ -312,25 +312,25 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
                                           ),
                                         ),
                                         onPressed: () async {
-                                          // auth.loginOnTap(
-                                          //     email: _emailController.text
-                                          //         .toString()
-                                          //         .trim(),
-                                          //     pass: _passwordController.text
-                                          //         .toString()
-                                          //         .trim());
+                                          auth.loginOnTap(
+                                              email: _emailController.text
+                                                  .toString()
+                                                  .trim(),
+                                              pass: _passwordController.text
+                                                  .toString()
+                                                  .trim());
                                           //updated on 28/06/2022
 
-                                          if(_phoneController.text.isEmpty){
-                                            Fluttertoast.showToast(msg: "Please enter Mobile number");
-                                          }else if(_phoneController.text.length!=10){
-                                            Fluttertoast.showToast(msg: "Please enter valid 10 digit Mobile Number");
-
-                                          }else {
-                                            auth.VerifyWithPhone(
-                                                context: context,
-                                                phone: _phoneController.text);
-                                          }
+                                          // if(_phoneController.text.isEmpty){
+                                          //   Fluttertoast.showToast(msg: "Please enter Mobile number");
+                                          // }else if(_phoneController.text.length!=10){
+                                          //   Fluttertoast.showToast(msg: "Please enter valid 10 digit Mobile Number");
+                                          //
+                                          // }else {
+                                          //   auth.VerifyWithPhone(
+                                          //       context: context,
+                                          //       phone: _phoneController.text);
+                                          // }
                                         },
                                         child: Text(
                                           'Sign In',
@@ -500,7 +500,7 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
                             ]),
                       ),
                     ),
-                    auth.loader
+                    auth.loader==true
                         ? Positioned(
                             child: Container(
                                 height: MediaQuery.of(context).size.height,

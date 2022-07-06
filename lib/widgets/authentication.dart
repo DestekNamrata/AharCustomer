@@ -33,7 +33,7 @@ class _AuthenticationState extends State<Authentication> {
 
   logInCheck() async {
     var isUser = await userService.getBool();
-    if (isUser == true) {
+    if (isUser == false) {
       await _authController.refreshToken();
     } else {
       Get.off(() => LoginPage());
@@ -54,7 +54,7 @@ class _AuthenticationState extends State<Authentication> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(Images.splashImage, height: 230, width: 230),
+              Image.asset(Images.appLogo, height: 230, width: 230),
               SizedBox(height: 10),
               CircularProgressIndicator(color: Colors.white),
             ],

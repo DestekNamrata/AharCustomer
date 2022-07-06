@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:food_ex/views/searchAddressLoc.dart';
 import '/models/pay_stack.dart';
 import '/models/razor_pay.dart';
 import '/services/paystack_service.dart';
@@ -19,7 +20,8 @@ import 'package:shimmer/shimmer.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class CheckoutPage extends StatefulWidget {
-  const CheckoutPage({Key? key}) : super(key: key);
+  String address,lat,long;
+  CheckoutPage({Key? key,required this.address,required this.lat,required this.long}) : super(key: key);
 
   @override
   _CheckoutPageState createState() => _CheckoutPageState();
@@ -52,6 +54,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
     checkoutController.onInit();
     final stripesecret = settingController.stripeSecret;
     final stripekey = settingController.stripeKey;
+
+    // addressController.text=widget.address;
+
     print(stripekey);
     print(stripesecret);
     Stripe.publishableKey = stripekey!;
@@ -217,9 +222,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     ),
                     onPressed: isClicked
                         ? () async {
-                            setState(() {
-                              isClicked = false;
-                            });
+                            // setState(() {
+                            //   isClicked = false;
+                            // });
                             var total =
                                 cert.totalCartValue + cert.deliveryCharge!;
                             if (orderPaymentSelect == 0) {
@@ -228,6 +233,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                   addressController.text.trim(),
                                   false,
                                   '1',
+
                                   latitude,
                                   longitude,
                                   orderTypeSelect,
@@ -344,6 +350,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                   borderSide: BorderSide(color: Colors.grey)),
                               hintText: 'Enter your phone number',
                             ),
+                            onChanged: (value) {
+                              checkout.phone = value;
+                            },
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'Enter Your Phone';
@@ -353,10 +362,14 @@ class _CheckoutPageState extends State<CheckoutPage> {
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: checkout.address == null
-                                ? TextFormField(
+                            child:
+                            // checkout.address == null
+                            //     ?
+                            TextFormField(
+                              enabled: false,
                                     controller: addressController,
                                     obscureText: false,
+                                    maxLines: 3,
                                     //initialValue: widget.userdata['name'],
                                     textAlign: TextAlign.start,
                                     keyboardType: TextInputType.text,
@@ -365,7 +378,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                       height: 0.8,
                                     ),
                                     decoration: InputDecoration(
-                                      hintText: 'Enter your address',
+                                      hintText: 'Address',
                                       hintStyle: TextStyle(
                                           fontSize: 15, color: Colors.grey),
                                       enabledBorder: OutlineInputBorder(
@@ -387,35 +400,74 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                     onChanged: (value) {
                                       checkout.address = value;
                                     },
-                                  )
-                                : TextFormField(
-                                    textAlign: TextAlign.start,
-                                    controller: addressController
-                                      ..text = checkout.address!
-                                      ..selection = TextSelection.collapsed(
-                                          offset:
-                                              addressController.text.length),
-                                    minLines: 2,
-                                    maxLines: 5,
-                                    keyboardType: TextInputType.multiline,
-                                    decoration: InputDecoration(
-                                      hintText: 'Enter your address',
-                                      hintStyle: TextStyle(color: Colors.grey),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.grey),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.grey),
-                                      ),
-                                      border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10))),
-                                    ),
                                   ),
+                                // : TextFormField(
+                                //     textAlign: TextAlign.start,
+                                //     controller: addressController
+                                //       ..text = checkout.address!
+                                //       ..selection = TextSelection.collapsed(
+                                //           offset:
+                                //               addressController.text.length),
+                                //     minLines: 2,
+                                //     maxLines: 5,
+                                //     keyboardType: TextInputType.multiline,
+                                //     decoration: InputDecoration(
+                                //       hintText: 'Enter your address',
+                                //       hintStyle: TextStyle(color: Colors.grey),
+                                //       enabledBorder: OutlineInputBorder(
+                                //         borderSide:
+                                //             BorderSide(color: Colors.grey),
+                                //       ),
+                                //       focusedBorder: OutlineInputBorder(
+                                //         borderSide:
+                                //             BorderSide(color: Colors.grey),
+                                //       ),
+                                //       border: OutlineInputBorder(
+                                //           borderRadius: BorderRadius.all(
+                                //               Radius.circular(10))),
+                                //     ),
+                                //   ),
                           ),
-                          Text('Payment Type',
+                          //updated on 4/07/2022
+                          Container(
+                            height: 40,
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: ThemeColors
+                                    .facebookColor, // background
+                                onPrimary: Colors.white, // foreground
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      10), // <-- Radius
+                                ),
+                              ),
+                              onPressed: () async {
+                                var result=await Navigator.push(context,
+                                    MaterialPageRoute(builder: (context)=>SearchAddressLocation()));
+                                if(result!=null){
+                                  print("data");
+                                  setState(() {
+
+                                    addressController.text=result['address'];
+                                    latitude=result['lat'];
+                                    longitude=result['long'];
+                                  });
+
+                                }
+                                // Get.to(()=>SearchAddressLocation());
+                              },
+                              child:
+                                  Padding(
+                                    padding:
+                                    EdgeInsets.only(left: 10.0),
+                                    child: Text("Add Location"),
+
+                              ),
+                            ),
+                          ),
+                    SizedBox(height: 10.0,),
+                    Text('Payment Type',
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 18,

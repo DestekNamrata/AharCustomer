@@ -220,28 +220,28 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                         ),
                         onPressed: () =>
-                          //   controller.signupOnTap(
-                          // context: context,
-                          // email:
-                          //     controller.emailController.text.toString().trim(),
-                          // password: controller.passwordController.text
-                          //     .toString()
-                          //     .trim(),
-                          // phoneNumber:
-                          //     controller.phoneController.text.toString().trim(),
-                          // name:
-                          //     controller.nameController.text.toString().trim(),
-                          // confirmPassword: controller
-                          //     .passwordConfirmationController.text
-                          //     .toString()
-                          //     .trim(),
-                        controller.VerifyWithPhoneSignUp(context: context,
-                            email: controller.emailController.text.toString().trim(),
-                        phone: controller.phoneController.text.toString().trim(),
-                        name: controller.nameController.text.toString().trim(),
-                          password: controller.passwordController.text.toString().trim(),
-                          cnfPass: controller.passwordConfirmationController.text.toString().trim(),
-                          userName: controller.usernameController.text.toString().trim()
+                            controller.signupOnTap(
+                          context: context,
+                          email:
+                              controller.emailController.text.toString().trim(),
+                          password: controller.passwordController.text
+                              .toString()
+                              .trim(),
+                          phoneNumber:
+                              controller.phoneController.text.toString().trim(),
+                          name:
+                              controller.nameController.text.toString().trim(),
+                          confirmPassword: controller
+                              .passwordConfirmationController.text
+                              .toString()
+                              .trim(),
+                        // controller.VerifyWithPhoneSignUp(context: context,
+                        //     email: controller.emailController.text.toString().trim(),
+                        // phone: controller.phoneController.text.toString().trim(),
+                        // name: controller.nameController.text.toString().trim(),
+                        //   password: controller.passwordController.text.toString().trim(),
+                        //   cnfPass: controller.passwordConfirmationController.text.toString().trim(),
+                        //   userName: controller.usernameController.text.toString().trim()
 
                         ),
                         child: Text(
@@ -280,7 +280,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ],
                 ),
-                auth.loader
+                auth.loader==true
                     ? Positioned(
                         child: Container(
                             height: MediaQuery.of(context).size.height,
